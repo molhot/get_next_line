@@ -4,7 +4,6 @@ char *ft_save_gnl(int fd, char *save)
 {
 	char *buff;
 	int flag;
-	ssize_t bytes;
 	int counter;
 	
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -73,7 +72,7 @@ char *ft_preparenextline(char *save_in_n)
 	return save_notin_n;
 }
 
-char *ft_get_next_line(int fd_num)
+char *get_next_line(int fd_num)
 {
 	char *line;
 	static char *save = "";

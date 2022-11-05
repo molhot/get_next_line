@@ -24,9 +24,7 @@ char    *ft_strchr(const char (*s), int c)
 }
 
 static	char	*input_char(const char (*insert), char (*inserted))
-{
-	char	*first_address;
-
+{	
 	while ((*insert) != '\0')
 	{
 		*inserted = *insert;
