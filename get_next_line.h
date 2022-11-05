@@ -16,6 +16,10 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char (*string_row));
 char	*ft_strdup(const char *s1);
 void	ft_bzero(void *str, size_t n);
+char *ft_get_next_line(int fd_num);
+char *ft_save_gnl(int fd, char *save);
+char	*ft_prepareline(char *save);
+char *ft_preparenextline(char *save_in_n);
 
 #endif
 

@@ -1,4 +1,4 @@
-#include "ft_gnl.h"
+#include "get_next_line.h"
 
 char *ft_save_gnl(int fd, char *save)
 {
@@ -83,29 +83,4 @@ char *ft_get_next_line(int fd_num)
 	save = ft_preparenextline(save);
 
 	return (line);
-}
-
-int main()
-{
-    int buff_size;
-    char *line;
-	int fd;
-
-    buff_size = 3;
-    fd = open("new.txt", O_RDONLY);
-    line = ft_get_next_line(fd);
-	printf("first line is ==>> %s\n", line);
-	printf(" %s\n", "^^^^^^^^^^^^^^^^^^^^^^^");
-	line = ft_get_next_line(fd);
-	printf("second line is ==>> %s\n", line);
-	printf(" %s\n", "^^^^^^^^^^^^^^^^^^^^^^^");
-	line = ft_get_next_line(fd);
-	printf("third line is ==>> %s\n", line);
-	printf(" %s\n", "^^^^^^^^^^^^^^^^^^^^^^^");
-	line = ft_get_next_line(fd);
-	printf("forth line is ==>> %s\n", line);
-	printf(" %s\n", "^^^^^^^^^^^^^^^^^^^^^^^");
-	line = ft_get_next_line(fd);
-	printf("fifth line is ==>> %s\n", line);
-	printf(" %s\n", "^^^^^^^^^^^^^^^^^^^^^^^");
 }
