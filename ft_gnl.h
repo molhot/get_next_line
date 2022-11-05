@@ -1,6 +1,6 @@
 # ifndef FT_GNL
 #define FT_GNL
-#define BUFFER_SIZE 3
+#define BUFFER_SIZE 2
 
 #include<stdio.h>
 #include<string.h>
