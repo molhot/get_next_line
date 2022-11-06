@@ -76,7 +76,9 @@ char *get_next_line(int fd_num)
 {
 	char *line;
 	static char *save = "";
-
+	
+	if (fd_num <= 0)
+		return (NULL);
     save = ft_save_gnl(fd_num, save);
 	line = ft_prepareline(save);
 	save = ft_preparenextline(save);
