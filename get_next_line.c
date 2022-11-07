@@ -55,7 +55,6 @@ char *ft_preparenextline(char *save_in_n)
 {
 	char *save_notin_n;
 	int index;
-	int mallocsize_next;
 	char *firstadd_savein_n;
 
 	index = 0;
