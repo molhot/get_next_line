@@ -50,6 +50,7 @@ char	*ft_strdup(const char *s)
 		src_sub = src_sub + 1;
 	}
 	*src_sub = '\0';
+	src_sub = src_sub - len;
 	return (src_sub);
 }
 
@@ -60,12 +61,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*dust_first;
 
 	if ((s1 == NULL) && (s2 == NULL))
-		return (NULL);
-	if (s1 == NULL)
 	{
-		return (ft_strdup(s2));
-		printf("%s", "hello");
+		printf("%s","hey");
+		return (NULL);
 	}
+	if (s1 == NULL)
+		return (ft_strdup(s2));
 	if (s2 == NULL)
 		return (ft_strdup(s1));
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;

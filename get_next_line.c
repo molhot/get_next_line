@@ -75,13 +75,23 @@ char *ft_preparenextline(char *save_in_n)
 char *get_next_line(int fd_num)
 {
 	char *line;
-	static char *save = "";
+	static char *save;
 	
-	if (fd_num <= 0)
+	if (fd_num < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
     save = ft_save_gnl(fd_num, save);
+	if (save == NULL)
+		return (NULL);
 	line = ft_prepareline(save);
 	save = ft_preparenextline(save);
-
 	return (line);
 }
+
+/*
+int main()
+{
+	int fd = open("new.txt", O_RDWR);
+	printf("1 %s\n", get_next_line(fd));
+	printf("2 %s\n", get_next_line(fd));
+}
+*/
