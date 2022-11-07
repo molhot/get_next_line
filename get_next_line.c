@@ -3,46 +3,51 @@
 char *ft_save_gnl(int fd, char *save)
 {
 	char *buff;
-	int flag;
-	int counter;
+	ssize_t flag;
 	
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	counter = 0;
 	if(buff == NULL)
 		return (NULL);
 	flag = 1;
-	while(flag > 0)
+	while(ft_strchr(save, '\n') == NULL)
     {
-		if((save != NULL && ft_strchr(save, '\n') != NULL))
-			break ;
 		flag = read(fd, buff, BUFFER_SIZE);
-		if(flag == -1 || flag == 0)
+		if(flag == 0 || flag == -1)
 			break ;
 		buff[flag] = '\0';
 		save = ft_strjoin(save, buff);
-		counter = counter + 1;
+		if (save == NULL)
+		{
+			free(buff);
+			return (NULL);
+		}
     }
 	free(buff);
+	if(flag == -1)
+		return (NULL);
 	return (save);
 }
 
 char	*ft_prepareline(char *save)
 {
-	int index;
 	char *line;
-	int mallocsize;
+	int i;
 
-	mallocsize = ft_strlen(save);
-	line = (char *)malloc(sizeof(char) * (mallocsize + 1));
+	i = 0;
+	if(save[i] == '\0')
+		return (NULL);
+	while(save[i] != '\0' && save[i] != '\n')
+		i = i + 1;
+	line = (char *)malloc(sizeof(char) * (i + 1));
 	if(line == NULL)
 		return (NULL);
-	index = 0;
-	while(save[index] != '\n' && save[index] != '\0')
+	i = 0;
+	while(save[i] != '\n' && save[i] != '\0')
 	{
-		line[index] = save[index];
-		index = index + 1;
+		line[i] = save[i];
+		i = i + 1;
 	}
-	line[index] = '\0';
+	line[i] = '\0';
 	return (line);
 }
 
@@ -60,8 +65,10 @@ char *ft_preparenextline(char *save_in_n)
 	if(*save_in_n == '\0')
 		return NULL;
 	save_in_n = save_in_n + 1;
-	mallocsize_next = ft_strlen(save_in_n) + 1;
-	save_notin_n = (char *)malloc(sizeof(char) * mallocsize_next);
+	while(save_in_n[index] != '\n' || save_in_n[index] != '\0')
+		index = index + 1;
+	save_notin_n = (char *)malloc(sizeof(char) * (index + 1));
+	index = 0;
 	while(save_in_n[index] != '\0')
 	{
 		save_notin_n[index] = save_in_n[index];
@@ -86,12 +93,3 @@ char *get_next_line(int fd_num)
 	save = ft_preparenextline(save);
 	return (line);
 }
-
-/*
-int main()
-{
-	int fd = open("new.txt", O_RDWR);
-	printf("1 %s\n", get_next_line(fd));
-	printf("2 %s\n", get_next_line(fd));
-}
-*/
