@@ -38,8 +38,8 @@ char	*ft_prepareline(char *save)
 		return (NULL);
 	while(save[i] != '\0' && save[i] != '\n')
 		i = i + 1;
-	//if(save[i] == '\n')
-		//i = i + 1;
+	if(save[i] == '\n')
+		i = i + 1;
 	line = (char *)malloc(sizeof(char) * (i + 1));
 	if(line == NULL)
 		return (NULL);
@@ -49,8 +49,9 @@ char	*ft_prepareline(char *save)
 		line[i] = save[i];
 		i = i + 1;
 	}
-	//if(save[i] == '\n')
-		//line[i + 1] = '\n';
+	if(save[i] == '\n')
+		line[i] = '\n';
+	i = i + 1;
 	line[i] = '\0';
 	return (line);
 }
@@ -99,6 +100,7 @@ char *get_next_line(int fd_num)
 	return (line);
 }
 
+/*
 int main()
 {
  	size_t	i;
@@ -107,12 +109,11 @@ int main()
 
 	fd = open("new.txt",O_RDONLY);
 	i = 0;
-	while (i < 5)
+	while (i < 10)
 	{
-		if (s == NULL || s[0] == '\0')
-			printf("\n");
 		s = get_next_line(fd);
-		printf("line%zu : %s\n", i, s);
+		printf("line%zu : %s", i, s);
 		i++;
  	}
 }
+*/
