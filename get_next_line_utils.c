@@ -16,15 +16,47 @@ char    *ft_strchr(const char (*s), int c)
     return (NULL);
 }
 
-static	char	*input_char(const char (*insert), char (*inserted))
-{	
-	while ((*insert) != '\0')
+size_t	ft_strlcat(char *dst, char *src, size_t final_dst_size)
+{
+	size_t	i;
+	size_t	dst_len;
+	size_t	src_len;
+
+	src_len = ft_strlen(src);
+	if (dst == NULL && final_dst_size == 0)
+		return (src_len);
+	dst_len = ft_strlen(dst);
+	if (final_dst_size == 0)
+		return (src_len);
+	if (dst_len < final_dst_size)
 	{
-		*inserted = *insert;
-		insert = insert + 1;
-		inserted = inserted + 1;
+		i = 0;
+		while (src[i] != '\0' && i < final_dst_size - dst_len - 1)
+		{
+			dst[dst_len + i] = src[i];
+			i++;
+		}
+		dst[dst_len + i] = '\0';
+		return (src_len + dst_len);
 	}
-	return (inserted);
+	return (src_len + final_dst_size);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t cpysize)
+{
+	size_t	i;
+
+	if (cpysize)
+	{
+		i = 0;
+		while (src[i] != '\0' && i < cpysize - 1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
 }
 
 char	*ft_strdup(const char *s)
@@ -54,10 +86,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*dust_first;
 
 	if ((s1 == NULL) && (s2 == NULL))
-	{
-		printf("%s","hey");
 		return (NULL);
-	}
 	if (s1 == NULL)
 		return (ft_strdup(s2));
 	if (s2 == NULL)
@@ -67,9 +96,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!(dust))
 		return (NULL);
 	dust_first = dust;
-	dust = input_char(s1, dust);
-	dust = input_char(s2, dust);
-	*dust = '\0';
+	ft_strlcpy(dust, s1, ft_strlen(s1) + 1);
+	ft_strlcat(dust, (char *)s2, len);
+	free((char *)s1);
 	return (dust_first);
 }
 
@@ -85,26 +114,3 @@ size_t	ft_strlen(const char (*string_row))
 	}
 	return (counter);
 }
-
-void	ft_bzero(void *str, size_t n)
-{
-	char	*str_remake;
-
-	str_remake = (char *)str;
-	while (n != 0)
-	{
-		*str_remake = '\0';
-		str_remake = str_remake + 1;
-		n = n - 1;
-	}
-}
-
-/*
-int main()
-{
-	char *test;
-
-	test = ft_strchr("aaaaaaaa", '\n');
-	printf("%s", test);
-}
-*/

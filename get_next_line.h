@@ -23,6 +23,8 @@ char *get_next_line(int fd_num);
 char *ft_save_gnl(int fd, char *save);
 char	*ft_prepareline(char *save);
 char *ft_preparenextline(char *save_in_n);
+size_t	ft_strlcat(char *dst, char *src, size_t final_dst_size);
+size_t	ft_strlcpy(char *dst, const char *src, size_t cpysize);
 
 #endif
 

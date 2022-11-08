@@ -38,9 +38,7 @@ char	*ft_prepareline(char *save)
 		return (NULL);
 	while(save[i] != '\0' && save[i] != '\n')
 		i = i + 1;
-	//if(save[i] == '\n')
-		//i = i + 1;
-	line = (char *)malloc(sizeof(char) * (i + 1));
+	line = (char *)malloc(sizeof(char) * (i + (save[i] == '\n') + 1));
 	if(line == NULL)
 		return (NULL);
 	i = 0;
@@ -49,8 +47,8 @@ char	*ft_prepareline(char *save)
 		line[i] = save[i];
 		i = i + 1;
 	}
-	//if(save[i] == '\n')
-		//line[i + 1] = '\n';
+	if(save[i] == '\n')
+		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
@@ -87,32 +85,23 @@ char *ft_preparenextline(char *save_in_n)
 char *get_next_line(int fd_num)
 {
 	char *line;
-	static char *save;
+	static char *save[256];
 	
 	if (fd_num < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-    save = ft_save_gnl(fd_num, save);
+    save[fd_num] = ft_save_gnl(fd_num, save[fd_num]);
+	printf("save is %s\n",save);
 	if (save == NULL)
 		return (NULL);
-	line = ft_prepareline(save);
-	save = ft_preparenextline(save);
+	line = ft_prepareline(save[fd_num]);
+	save[fd_num] = ft_preparenextline(save[fd_num]);
 	return (line);
 }
 
 int main()
 {
- 	size_t	i;
- 	int		fd;
- 	char *s;
-
-	fd = open("new.txt",O_RDONLY);
-	i = 0;
-	while (i < 5)
-	{
-		if (s == NULL || s[0] == '\0')
-			printf("\n");
-		s = get_next_line(fd);
-		printf("line%zu : %s\n", i, s);
-		i++;
- 	}
+	printf("1 -> %s\n", get_next_line(open("new.txt", O_RDONLY)));
+	printf("2 -> %s\n", get_next_line(open("new.txt", O_RDONLY)));
+	printf("3 -> %s\n", get_next_line(open("new.txt", O_RDONLY)));
+	printf("4 -> %s\n", get_next_line(open("new.txt", O_RDONLY)));
 }
