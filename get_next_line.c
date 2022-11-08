@@ -50,8 +50,10 @@ char	*ft_prepareline(char *save)
 		i = i + 1;
 	}
 	if(save[i] == '\n')
+	{
 		line[i] = '\n';
-	i = i + 1;
+		i = i + 1;
+	}
 	line[i] = '\0';
 	return (line);
 }
@@ -100,7 +102,7 @@ char *get_next_line(int fd_num)
 	return (line);
 }
 
-/*
+
 int main()
 {
  	size_t	i;
@@ -116,4 +118,4 @@ int main()
 		i++;
  	}
 }
-*/
+
