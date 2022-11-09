@@ -6,7 +6,7 @@
 /*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:51 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/09 12:39:21 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/09 12:50:27 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ char	*ft_prepareline(char *save)
 		return (NULL);
 	i = 0;
 	while (save[i] != '\n' && save[i] != '\0')
-		line[i++] = save[i];
-	if (save[i] == '\n')
 	{
-		line[i] = '\n';
-		i = i + 1;
+		line[i] = save[i];
+		i++;
 	}
+	if (save[i] == '\n')
+		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
