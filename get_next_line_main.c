@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_2.c                                  :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:51 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/10 07:29:32 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/09 22:41:09 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 size_t	ft_strlen(const char (*string_row))
 {
-	const char	*first;
+	char *first;
 
 	first = string_row;
-	while (*string_row != '\0' && *string_row != '\n')
+	while (*string_row != '\0')
 		string_row++;
 	return (string_row - first);
 }
@@ -53,15 +53,16 @@ char	*ft_save_gnl(int fd, char *save)
 char	*ft_prepareline(char *save)
 {
 	char	*line;
-	size_t	i;
-	size_t	in_n_len;
+	int		i;
 
-	if (save[0] == '\0')
+	i = 0;
+	if (save[i] == '\0')
 		return (NULL);
-	in_n_len = strlen(save);
-	if (save[in_n_len] == '\n')
-		in_n_len++;
-	line = (char *)malloc(sizeof(char) * (in_n_len + 1));
+	while (save[i] != '\0' && save[i] != '\n')
+		i = i + 1;
+	if (save[i] == '\n')
+		i = i + 1;
+	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (line == NULL)
 		return (NULL);
 	i = 0;
@@ -120,7 +121,7 @@ char	*get_next_line(int fd_num)
 	return (line);
 }
 
-
+/*
 int main()
 {
  	size_t	i;
@@ -136,3 +137,4 @@ int main()
 		i++;
  	}
 }
+*/
