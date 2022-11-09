@@ -6,7 +6,7 @@
 /*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:51 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/09 12:50:27 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/09 12:58:15 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ char	*get_next_line(int fd_num)
 	return (line);
 }
 
+/*
 int main()
 {
  	size_t	i;
@@ -139,3 +140,4 @@ int main()
 		i++;
  	}
 }
+*/
