@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/08 22:39:48 by satushi           #+#    #+#             */
+/*   Updated: 2022/11/09 12:26:47 by satushi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char    *ft_strchr(const char (*s), int c)
+char	*ft_strchr(const char (*s), int c)
 {
-    size_t     num;
+	size_t	num;
 
-	if(s == NULL)
+	if (s == NULL)
 		return (NULL);
 	num = 0;
-    while (s[num] != '\0')
-    {
-        if ((unsigned char)s[num] == (unsigned char)c)
-            return ((char *)s + num);
-        num = num + 1;
-    }
-    return (NULL);
+	while (s[num] != '\0')
+	{
+		if ((unsigned char)s[num] == (unsigned char)c)
+			return ((char *)s + num);
+		num = num + 1;
+	}
+	return (NULL);
 }
 
 size_t	ft_strlcat(char *dst, char *src, size_t final_dst_size)
@@ -100,17 +112,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(dust, (char *)s2, len);
 	free((char *)s1);
 	return (dust_first);
-}
-
-size_t	ft_strlen(const char (*string_row))
-{
-	size_t	counter;
-
-	counter = 0;
-	while (*string_row != '\0')
-	{
-		counter = counter + 1;
-		string_row = string_row + 1;
-	}
-	return (counter);
 }
