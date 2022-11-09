@@ -6,7 +6,7 @@
 /*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:51 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/09 22:41:09 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/10 08:27:18 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 size_t	ft_strlen(const char (*string_row))
 {
-	char *first;
+	size_t	stringlen;
 
-	first = string_row;
-	while (*string_row != '\0')
-		string_row++;
-	return (string_row - first);
+	stringlen = 0;
+	while (string_row[stringlen] != '\0')
+		stringlen++;
+	return (stringlen);
 }
 
 char	*ft_save_gnl(int fd, char *save)
