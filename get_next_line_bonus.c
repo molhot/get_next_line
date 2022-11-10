@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
+/*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:51 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/10 09:45:35 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/10 23:32:17 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,20 +121,35 @@ char	*get_next_line(int fd_num)
 	return (line);
 }
 
-/*
+
 int main()
 {
  	size_t	i;
- 	int		fd;
- 	char *s;
+ 	int		fd1;
+	int		fd2;
+ 	char *s1;
+	char *s2;
 
-	fd = open("new.txt",O_RDONLY);
 	i = 0;
-	while (i < 10)
-	{
-		s = get_next_line(fd);
-		printf("line%zu : %s", i, s);
-		i++;
- 	}
+	fd1 = open("new.txt",O_RDONLY);
+	fd2 = open("new2.txt",O_RDONLY);
+	s1 = get_next_line(fd1);
+	printf("line1%zu : %s\n", i, s1);
+	s2 = get_next_line(fd2);
+	printf("line2%zu : %s\n", i, s2);
+
+	s1 = get_next_line(fd1);
+	printf("line1%zu : %s\n", i, s1);
+	s2 = get_next_line(fd2);
+	printf("line2%zu : %s\n", i, s2);
+
+	s1 = get_next_line(fd1);
+	printf("line1%zu : %s\n", i, s1);
+	s2 = get_next_line(fd2);
+	printf("line2%zu : %s\n", i, s2);
+
+	s1 = get_next_line(fd1);
+	printf("line1%zu : %s\n", i, s1);
+	s2 = get_next_line(fd2);
+	printf("line2%zu : %s\n", i, s2);
 }
-*/
