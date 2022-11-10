@@ -6,11 +6,21 @@
 /*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:19:47 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/09 12:20:32 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/10 11:28:20 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlen(const char (*string_row))
+{
+	size_t	stringlen;
+
+	stringlen = 0;
+	while (string_row[stringlen] != '\0')
+		stringlen++;
+	return (stringlen);
+}
 
 char	*ft_save_gnl(int fd, char *save)
 {
@@ -50,14 +60,16 @@ char	*ft_prepareline(char *save)
 		return (NULL);
 	while (save[i] != '\0' && save[i] != '\n')
 		i = i + 1;
-	line = (char *)malloc(sizeof(char) * (i + (save[i] == '\n') + 1));
+	if (save[i] == '\n')
+		i = i + 1;
+	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (line == NULL)
 		return (NULL);
 	i = 0;
 	while (save[i] != '\n' && save[i] != '\0')
 	{
 		line[i] = save[i];
-		i = i + 1;
+		i++;
 	}
 	if (save[i] == '\n')
 		line[i++] = '\n';
@@ -65,54 +77,46 @@ char	*ft_prepareline(char *save)
 	return (line);
 }
 
-char	*ft_preparenextline(char *save_in_n)
+char	*ft_preparenextline(char *saven)
 {
 	char	*save_notin_n;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	while (save_in_n[i] != '\n' && save_in_n[i] != '\0')
+	while (saven[i] != '\n' && saven[i] != '\0')
 		i = i + 1;
-	if (save_in_n[i] == '\0')
+	if (saven[i] == '\0')
 	{
-		free(save_in_n);
+		free(saven);
 		return (NULL);
 	}
-	save_notin_n = (char *)malloc(sizeof(char) * (ft_strlen(save_in_n) - i + 1));
+	save_notin_n = (char *)malloc(sizeof(char) * (ft_strlen(saven) - i + 1));
 	if (save_notin_n == NULL)
 		return (NULL);
 	i = i + 1;
 	j = 0;
-	while (save_in_n[i + j] != '\0')
+	while (saven[i + j] != '\0')
 	{
-		save_notin_n[j] = save_in_n[i + j];
+		save_notin_n[j] = saven[i + j];
 		j = j + 1;
 	}
 	save_notin_n[j] = '\0';
-	free(save_in_n);
+	free(saven);
 	return (save_notin_n);
 }
 
 char	*get_next_line(int fd_num)
 {
 	char		*line;
-	static char	*save[256];
+	static char	*save;
 
 	if (fd_num < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	save[fd_num] = ft_save_gnl(fd_num, save[fd_num]);
+	save = ft_save_gnl(fd_num, save);
 	if (save == NULL)
 		return (NULL);
-	line = ft_prepareline(save[fd_num]);
-	save[fd_num] = ft_preparenextline(save[fd_num]);
+	line = ft_prepareline(save);
+	save = ft_preparenextline(save);
 	return (line);
-}
-
-int	main()
-{
-	printf("1 -> %s\n", get_next_line(open("new.txt", O_RDONLY)));
-	printf("2 -> %s\n", get_next_line(open("new.txt", O_RDONLY)));
-	printf("3 -> %s\n", get_next_line(open("new.txt", O_RDONLY)));
-	printf("4 -> %s\n", get_next_line(open("new.txt", O_RDONLY)));
 }

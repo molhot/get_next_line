@@ -6,7 +6,7 @@
 /*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:48 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/10 09:28:05 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/10 11:28:56 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	*ft_strchr(const char (*s), int c)
 	}
 	return (NULL);
 }
-
 
 char	*ft_strdup(const char *s)
 {
@@ -80,7 +79,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	dust = input_char(s1, dust);
 	dust = input_char(s2, dust);
 	*dust = '\0';
-	free((char*)s1);
+	free((char *)s1);
 	return (dust_first);
 }
-
