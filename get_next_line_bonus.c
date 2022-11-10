@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 22:19:47 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/10 11:28:20 by satushi          ###   ########.fr       */
+/*   Created: 2022/11/08 22:39:51 by satushi           #+#    #+#             */
+/*   Updated: 2022/11/10 09:45:35 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,3 +120,21 @@ char	*get_next_line(int fd_num)
 	save = ft_preparenextline(save);
 	return (line);
 }
+
+/*
+int main()
+{
+ 	size_t	i;
+ 	int		fd;
+ 	char *s;
+
+	fd = open("new.txt",O_RDONLY);
+	i = 0;
+	while (i < 10)
+	{
+		s = get_next_line(fd);
+		printf("line%zu : %s", i, s);
+		i++;
+ 	}
+}
+*/

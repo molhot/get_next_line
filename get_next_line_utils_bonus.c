@@ -6,7 +6,7 @@
 /*   By: satushi <sakata19991214@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:48 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/10 08:48:51 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/10 11:28:56 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,49 +26,6 @@ char	*ft_strchr(const char (*s), int c)
 		num = num + 1;
 	}
 	return (NULL);
-}
-
-size_t	ft_strlcat(char *dst, char *src, size_t final_dst_size)
-{
-	size_t	i;
-	size_t	dst_len;
-	size_t	src_len;
-
-	src_len = ft_strlen(src);
-	if (dst == NULL && final_dst_size == 0)
-		return (src_len);
-	dst_len = ft_strlen(dst);
-	if (final_dst_size == 0)
-		return (src_len);
-	if (dst_len < final_dst_size)
-	{
-		i = 0;
-		while (src[i] != '\0' && i < final_dst_size - dst_len - 1)
-		{
-			dst[dst_len + i] = src[i];
-			i++;
-		}
-		dst[dst_len + i] = '\0';
-		return (src_len + dst_len);
-	}
-	return (src_len + final_dst_size);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t cpysize)
-{
-	size_t	i;
-
-	if (cpysize != 0)
-	{
-		i = 0;
-		while (src[i] != '\0' && i < cpysize - 1)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (ft_strlen(src));
 }
 
 char	*ft_strdup(const char *s)
@@ -91,11 +48,22 @@ char	*ft_strdup(const char *s)
 	return (src_sub);
 }
 
+static	char	*input_char(const char *insert, char *inserted)
+{
+	while ((*insert) != '\0')
+	{
+		*inserted = *insert;
+		insert = insert + 1;
+		inserted = inserted + 1;
+	}
+	return (inserted);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		len;
-	char	*dust;
-	char	*dust_first;
+	size_t		len;
+	char		*dust;
+	char		*dust_first;
 
 	if ((s1 == NULL) && (s2 == NULL))
 		return (NULL);
@@ -103,13 +71,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s2));
 	if (s2 == NULL)
 		return (ft_strdup(s1));
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	dust = (char *)malloc(sizeof(char) * len);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	dust = (char *)malloc(sizeof(char) * (len + 1));
 	if (!(dust))
 		return (NULL);
 	dust_first = dust;
-	ft_strlcpy(dust, s1, ft_strlen(s1) + 1);
-	ft_strlcat(dust, (char *)s2, len);
+	dust = input_char(s1, dust);
+	dust = input_char(s2, dust);
+	*dust = '\0';
 	free((char *)s1);
 	return (dust_first);
 }
