@@ -6,13 +6,13 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:48 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/10 23:21:27 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/11 20:01:04 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*ft_strchr(const char (*s), int c)
+char	*ft_strchr(const char *s, int c)
 {
 	size_t	num;
 

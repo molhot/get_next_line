@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:51 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/10 23:32:17 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/11 20:05:25 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char (*string_row))
 	size_t	stringlen;
 
 	stringlen = 0;
+	if(string_row == NULL)
+		return 0;
 	while (string_row[stringlen] != '\0')
 		stringlen++;
 	return (stringlen);
@@ -31,7 +33,7 @@ char	*ft_save_gnl(int fd, char *save)
 	if (buff == NULL)
 		return (NULL);
 	flag = 1;
-	while (ft_strchr(save, '\n') == NULL)
+	while (ft_strchr((char *)save, '\n') == NULL)
 	{
 		flag = read(fd, buff, BUFFER_SIZE);
 		if (flag == 0 || flag == -1)
@@ -109,19 +111,19 @@ char	*ft_preparenextline(char *saven)
 char	*get_next_line(int fd_num)
 {
 	char		*line;
-	static char	*save;
+	static char	*save[100];
 
-	if (fd_num < 0 || BUFFER_SIZE <= 0)
+	if (fd_num < 0 || BUFFER_SIZE <= 0 || 100 <= fd_num)
 		return (NULL);
-	save = ft_save_gnl(fd_num, save);
-	if (save == NULL)
+	save[fd_num] = ft_save_gnl(fd_num, save[fd_num]);
+	if (save[fd_num] == NULL)
 		return (NULL);
-	line = ft_prepareline(save);
-	save = ft_preparenextline(save);
+	line = ft_prepareline(save[fd_num]);
+	save[fd_num] = ft_preparenextline(save[fd_num]);
 	return (line);
 }
 
-
+/*
 int main()
 {
  	size_t	i;
@@ -153,3 +155,4 @@ int main()
 	s2 = get_next_line(fd2);
 	printf("line2%zu : %s\n", i, s2);
 }
+*/
