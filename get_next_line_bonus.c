@@ -6,7 +6,7 @@
 /*   By: satushi <satushi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 22:39:51 by satushi           #+#    #+#             */
-/*   Updated: 2022/11/11 20:05:25 by satushi          ###   ########.fr       */
+/*   Updated: 2022/11/11 20:12:25 by satushi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ size_t	ft_strlen(const char (*string_row))
 	size_t	stringlen;
 
 	stringlen = 0;
-	if(string_row == NULL)
-		return 0;
+	if (string_row == NULL)
+		return (0);
 	while (string_row[stringlen] != '\0')
 		stringlen++;
 	return (stringlen);
