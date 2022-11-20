@@ -111,7 +111,7 @@ char	*ft_preparenextline(char *saven)
 char	*get_next_line(int fd_num)
 {
 	char		*line;
-	static char	*save[100];
+	static char	*save[1024];
 
 	if (fd_num < 0 || BUFFER_SIZE <= 0 || 100 <= fd_num)
 		return (NULL);
